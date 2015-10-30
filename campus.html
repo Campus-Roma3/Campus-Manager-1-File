@@ -539,7 +539,11 @@
                 document.location.hash = "#" + encodeURI(url);
             }
             function reseturl() {
-                document.location.hash = "#";
+            	if (confirm('Sei sicuro di voler ripristinare la situazione originaria del Campus?')) {
+            		document.location.hash = "#";
+            	} else {
+            		location.reload();
+            	} 
             }
             function makeandwriteurl(element) {
                 writeurl(makeurl(element));
