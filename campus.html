@@ -503,6 +503,12 @@
                 height: 40px;
                 padding: 10px;
             }
+
+            .reset {
+            	background: red;
+            	color: white;
+            	float: right;
+            }
 		</style>
         <script>
             function makeurl(element) {
@@ -599,6 +605,7 @@
                     table += "</tr>";
                 }
                 table += "</table>";
+                table += "<button type=\"reset\" value=\"Reset\" class=\"reset\" onclick=\"reseturl()\">Reset</button>";
                 document.getElementById("campus").innerHTML += table;
 
                 var imp2 = "";
@@ -616,7 +623,7 @@
 	</head>
 	<body>
     <form id="campus">
-        <button type="reset" value="Reset" onclick="reseturl()">Reset</button>
+        
     </form>
 	</body>
     <script>
