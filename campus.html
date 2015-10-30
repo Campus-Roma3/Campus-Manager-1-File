@@ -1,0 +1,358 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>Mappa Campus</title>
+		<meta name="author" content="Gaetano Bonofiglio, Lorenzo Ariemma, Tucci's PC">
+		<style>
+			div {
+				display: inline;
+				margin: 0; padding: 0;
+			}
+			input[type=checkbox] {
+                position: absolute;
+                top: -9999px;
+                left: -9999px;
+			}
+			label { 
+                -webkit-appearance: push-button;
+                -moz-appearance: button; 
+                display: inline-block;
+                cursor: pointer;
+                background: green;
+                padding: 10px 20px;
+                margin: 0;
+			}
+			label div {
+                display: inline-block;
+                font-family: arial, Tahoma;
+                font-weight: bold;
+                outline: 0px none !important;
+                border: 1px solid #999 !important;
+                color: #444;
+                background: transparent linear-gradient(to bottom, #EEE, #CCC) repeat scroll 0% 0%;
+                white-space: nowrap;
+                padding-top: 5px; padding-bottom: 5px;
+                line-height: 1.4;
+                position: relative;
+                height: 20px;
+                width: 40px;
+                text-align: center;
+                overflow: hidden;
+			}
+			/* Toggled State */
+			input[type=checkbox]:checked ~ label{
+                background: red;
+			}
+			
+			table td {
+                height: 56px;
+                width: 82px;
+                table-layout: fixed;
+			}
+		</style>
+        <script>
+            function makeurl(element) {
+                var checkedValue = "";
+                var inputElements = document.getElementsByClassName('check');
+                for (var i = 0; i < inputElements.length ; ++i) {
+                    //fix because onclick is faster then actual checkbox
+                    var id = element.getAttribute("for");
+                    var actualElement = document.getElementById(id);
+                    if(actualElement===inputElements[i]) {
+                        if (actualElement.checked)
+                            checkedValue = checkedValue + "0";
+                        else
+                            checkedValue = checkedValue + "1";
+                    }
+                    else {
+                        if (inputElements[i].checked) {
+                            checkedValue = checkedValue + "1";
+                        }
+                        else {
+                            checkedValue = checkedValue + "0";
+                        }
+                    }
+                }
+                return checkedValue;
+            }
+            function writeurl(url) {
+                document.location.hash = "#" + encodeURI(url);
+            }
+            function makeandwriteurl(element) {
+                writeurl(makeurl(element));
+            }
+            function readurl() {
+                if(typeof(window.location.href.split("#")[1]) != "undefined") {
+                    var urlCodeApp = window.location.href.split("#")[1];
+                    urlCodeApp=decodeURI(urlCodeApp);
+                    var urlCodeArr = [];
+                    for (var i = 0; i < urlCodeApp.length; i++) {
+                        urlCodeArr[i] = parseInt(urlCodeApp.charCodeAt(i));
+                    }
+                    return urlCodeArr;
+                }
+                return [];
+            }
+            function applyurl(imp, urlarray){
+                if (urlarray == []) return;
+                var inputElements = document.getElementsByClassName('check');
+                for (var i = 0; i < inputElements.length; ++i) {
+                    if (urlarray[i]-imp[1]==10) {
+                        inputElements[i].checked = true;
+                    }
+                    else {
+                        inputElements[i].checked = false;
+                    }
+                }
+            }
+            function readandapplyurl(imp) {
+                applyurl(imp, readurl());
+            }
+
+            function init(imp, imp_c) {
+                var imp2 = "";
+                for (var i = 0; i < imp.length; ++i) {
+                    imp2 = imp2 + String.fromCharCode(imp[i]);
+                }
+                imp2 = imp2 + "\n";
+                for (var i = 0; i < imp_c.length; ++i) {
+                    imp2 = imp2 + String.fromCharCode(imp_c[i]);
+                }
+                console.log(imp2);
+                readandapplyurl(imp);
+            }
+        </script>
+	</head>
+	<body>	
+		<table>
+		  <tr>
+			<td></td>
+			<td><div><input type="checkbox" class="check" id="toggle-25">
+		<label onclick="makeandwriteurl(this)" for="toggle-25"><div>25</div></label></div></td>
+			<td></td>
+			<td><div><input type="checkbox" class="check" id="toggle-24">
+		<label onclick="makeandwriteurl(this)" for="toggle-24"><div>24</div></label></div></td>
+			<td><div><input type="checkbox" class="check" id="toggle-17">
+		<label onclick="makeandwriteurl(this)" for="toggle-17"><div>17</div></label></div></td>
+			<td></td>
+			<td></td>
+			<td><div><input type="checkbox" class="check" id="toggle-15">
+		<label onclick="makeandwriteurl(this)" for="toggle-15"><div>15</div></label></div></td>
+			<td><div><input type="checkbox" class="check" id="toggle-13">
+		<label onclick="makeandwriteurl(this)" for="toggle-13"><div>13</div></label></div></td>
+			<td></td>
+			<td><div><input type="checkbox" class="check" id="toggle-12">
+		<label onclick="makeandwriteurl(this)" for="toggle-12"><div>12</div></label></div></td>
+			<td><div><input type="checkbox" class="check" id="toggle-11">
+		<label onclick="makeandwriteurl(this)" for="toggle-11"><div>11</div></label></div></td>
+			<td><div><input type="checkbox" class="check" id="toggle-10">
+		<label onclick="makeandwriteurl(this)" for="toggle-10"><div>10</div></label></div></td>
+		  </tr>
+		  <tr>
+			<td></td>
+			<td><div><input type="checkbox" class="check" id="toggle-26">
+		<label onclick="makeandwriteurl(this)" for="toggle-26"><div>26</div></label></div></td>
+			<td></td>
+			<td><div><input type="checkbox" class="check" id="toggle-23">
+		<label onclick="makeandwriteurl(this)" for="toggle-23"><div>23</div></label></div></td>
+			<td><div><input type="checkbox" class="check" id="toggle-18">
+		<label onclick="makeandwriteurl(this)" for="toggle-18"><div>18</div></label></div></td>
+			<td></td>
+			<td></td>
+			<td><div><input type="checkbox" class="check" id="toggle-16">
+		<label onclick="makeandwriteurl(this)" for="toggle-16"><div>16</div></label></div></td>
+			<td><div><input type="checkbox" class="check" id="toggle-14">
+		<label onclick="makeandwriteurl(this)" for="toggle-14"><div>14</div></label></div></td>
+			<td></td>
+			<td></td>
+			<td></td>
+			<td><div><input type="checkbox" class="check" id="toggle-9">
+		<label onclick="makeandwriteurl(this)" for="toggle-9"><div>9</div></label></div></td>
+		  </tr>
+		  <tr>
+			<td></td>
+			<td></td>
+			<td></td>
+			<td><div><input type="checkbox" class="check" id="toggle-22">
+		<label onclick="makeandwriteurl(this)" for="toggle-22"><div>22</div></label></div></td>
+			<td><div><input type="checkbox" class="check" id="toggle-19">
+		<label onclick="makeandwriteurl(this)" for="toggle-19"><div>19</div></label></div></td>
+			<td></td>
+			<td></td>
+			<td></td>
+			<td></td>
+			<td></td>
+			<td></td>
+			<td></td>
+			<td><div><input type="checkbox" class="check" id="toggle-8">
+		<label onclick="makeandwriteurl(this)" for="toggle-8"><div>8</div></label></div></td>
+		  </tr>
+		  <tr>
+			<td></td>
+			<td></td>
+			<td></td>
+			<td><div><input type="checkbox" class="check" id="toggle-21">
+		<label onclick="makeandwriteurl(this)" for="toggle-21"><div>21</div></label></div></td>
+			<td><div><input type="checkbox" class="check" id="toggle-20">
+		<label onclick="makeandwriteurl(this)" for="toggle-20"><div>20</div></label></div></td>
+			<td></td>
+			<td></td>
+			<td></td>
+			<td></td>
+			<td></td>
+			<td></td>
+			<td></td>
+			<td><div><input type="checkbox" class="check" id="toggle-7">
+		<label onclick="makeandwriteurl(this)" for="toggle-7"><div>7</div></label></div></td>
+		  </tr>
+		  <tr>
+			<td></td>
+			<td></td>
+			<td></td>
+			<td></td>
+			<td></td>
+			<td></td>
+			<td><div><input type="checkbox" class="check" id="toggle-47">
+		<label onclick="makeandwriteurl(this)" for="toggle-47"><div>47</div></label></div></td>
+			<td><div><input type="checkbox" class="check" id="toggle-48">
+		<label onclick="makeandwriteurl(this)" for="toggle-48"><div>48</div></label></div></td>
+			<td><div><input type="checkbox" class="check" id="toggle-49">
+		<label onclick="makeandwriteurl(this)" for="toggle-49"><div>49</div></label></div></td>
+			<td><div><input type="checkbox" class="check" id="toggle-50">
+		<label onclick="makeandwriteurl(this)" for="toggle-50"><div>50</div></label></div></td>
+			<td></td>
+			<td></td>
+			<td><div><input type="checkbox" class="check" id="toggle-6">
+		<label onclick="makeandwriteurl(this)" for="toggle-6"><div>6</div></label></div></td>
+		  </tr>
+		  <tr>
+			<td></td>
+			<td></td>
+			<td></td>
+			<td></td>
+			<td></td>
+			<td></td>
+			<td><div><input type="checkbox" class="check" id="toggle-46">
+		<label onclick="makeandwriteurl(this)" for="toggle-46"><div>46</div></label></div></td>
+			<td><div><input type="checkbox" class="check" id="toggle-45">
+		<label onclick="makeandwriteurl(this)" for="toggle-45"><div>45</div></label></div></td>
+			<td><div><input type="checkbox" class="check" id="toggle-44">
+		<label onclick="makeandwriteurl(this)" for="toggle-44"><div>44</div></label></div></td>
+			<td><div><input type="checkbox" class="check" id="toggle-43">
+		<label onclick="makeandwriteurl(this)" for="toggle-43"><div>43</div></label></div></td>
+			<td></td>
+			<td></td>
+			<td><div><input type="checkbox" class="check" id="toggle-5">
+		<label onclick="makeandwriteurl(this)" for="toggle-5"><div>5</div></label></div></td>
+		  </tr>
+		  <tr>
+			<td></td>
+			<td></td>
+			<td></td>
+			<td></td>
+			<td></td>
+			<td></td>
+			<td></td>
+			<td></td>
+			<td></td>
+			<td></td>
+			<td></td>
+			<td></td>
+			<td><div><input type="checkbox" class="check" id="toggle-4">
+		<label onclick="makeandwriteurl(this)" for="toggle-4"><div>4</div></label></div></td>
+		  </tr>
+		  <tr>
+			<td><div><input type="checkbox" class="check" id="toggle-27">
+		<label onclick="makeandwriteurl(this)" for="toggle-27"><div>27</div></label></div></td>
+			<td><div><input type="checkbox" class="check" id="toggle-28">
+		<label onclick="makeandwriteurl(this)" for="toggle-28"><div>28</div></label></div></td>
+			<td></td>
+			<td><div><input type="checkbox" class="check" id="toggle-31">
+		<label onclick="makeandwriteurl(this)" for="toggle-31"><div>31</div></label></div></td>
+			<td><div><input type="checkbox" class="check" id="toggle-32">
+		<label onclick="makeandwriteurl(this)" for="toggle-32"><div>32</div></label></div></td>
+			<td></td>
+			
+			<td><div><input type="checkbox" class="check" id="toggle-42">
+		<label onclick="makeandwriteurl(this)" for="toggle-42"><div>42</div></label></div></td>
+			<td><div><input type="checkbox" class="check" id="toggle-41">
+		<label onclick="makeandwriteurl(this)" for="toggle-41"><div>41</div></label></div></td>
+			<td><div><input type="checkbox" class="check" id="toggle-40">
+		<label onclick="makeandwriteurl(this)" for="toggle-40"><div>40</div></label></div></td>
+			<td><div><input type="checkbox" class="check" id="toggle-39">
+		<label onclick="makeandwriteurl(this)" for="toggle-39"><div>39</div></label></div></td>
+			<td></td>
+			<td></td>
+			<td><div><input type="checkbox" class="check" id="toggle-3">
+		<label onclick="makeandwriteurl(this)" for="toggle-3"><div>3</div></label></div></td>
+		  </tr>
+		  <tr>
+			<td><div><input type="checkbox" class="check" id="toggle-29">
+		<label onclick="makeandwriteurl(this)" for="toggle-29" style="background: blue;"><div>29-B</div></label></div></td>
+			<td><div><input type="checkbox" class="check" id="toggle-30">
+		<label onclick="makeandwriteurl(this)" for="toggle-30" style="background: blue;"><div>30-B</div></label></div></td>
+			<td></td>
+			<td><div><input type="checkbox" class="check" id="toggle-33">
+		<label onclick="makeandwriteurl(this)" for="toggle-33"><div>33</div></label></div></td>
+			<td><div><input type="checkbox" class="check" id="toggle-34">
+		<label onclick="makeandwriteurl(this)" for="toggle-34"><div>34</div></label></div></td>
+			<td></td>
+			<td><div><input type="checkbox" class="check" id="toggle-35">
+		<label onclick="makeandwriteurl(this)" for="toggle-35"><div>35</div></label></div></td>
+			<td><div><input type="checkbox" class="check" id="toggle-36">
+		<label onclick="makeandwriteurl(this)" for="toggle-36"><div>36</div></label></div></td>
+			<td><div><input type="checkbox" class="check" id="toggle-37">
+		<label onclick="makeandwriteurl(this)" for="toggle-37"><div>37</div></label></div></td>
+			<td><div><input type="checkbox" class="check" id="toggle-38">
+		<label onclick="makeandwriteurl(this)" for="toggle-38"><div>38</div></label></div></td>
+			<td></td>
+			<td></td>
+			<td><div><input type="checkbox" class="check" id="toggle-2">
+		<label onclick="makeandwriteurl(this)" for="toggle-2"><div>2</div></label></div></td>
+		  </tr>
+		  <tr>
+			<td></td>
+			<td></td>
+			<td></td>
+			<td></td>
+			<td></td>
+			<td></td>
+			<td></td>
+			<td></td>
+			<td></td>
+			<td></td>
+			<td></td>
+			<td></td>
+			<td><div><input type="checkbox" class="check" id="toggle-1">
+		<label onclick="makeandwriteurl(this)" for="toggle-1"><div>1</div></label></div></td>
+		  </tr>
+		  <tr>
+			<td></td>
+			<td></td>
+			<td></td>
+			<td></td>
+			<td></td>
+			<td></td>
+			<td><div><input type="checkbox" class="check" id="toggle-54">
+		<label onclick="makeandwriteurl(this)" for="toggle-54"><div>54</div></label></div></td>
+			<td><div><input type="checkbox" class="check" id="toggle-53">
+		<label onclick="makeandwriteurl(this)" for="toggle-53"><div>53</div></label></div></td>
+			<td><div><input type="checkbox" class="check" id="toggle-52">
+		<label onclick="makeandwriteurl(this)" for="toggle-52"><div>52</div></label></div></td>
+			<td><div><input type="checkbox" class="check" id="toggle-51">
+		<label onclick="makeandwriteurl(this)" for="toggle-51"><div>51</div></label></div></td>
+			<td></td>
+			<td></td>
+			<td></td>
+		  </tr>
+		</table>
+
+        <script>
+            var imp = [76,39,97,117,116,111,114,101,32,100,105,32,113,117,101,115,116,111,32,115,99,114,105,112,116,32,232,32,71,97,101,116,97,110,111,32,66,111,110,111,102,105,103,108,105,111,32,101,32,84,117,99,99,105,32,110,111,110,32,104,97,32,102,97,116,116,111,32,110,117,108,108,97];
+            var imp_c = [83,99,114,105,112,116,44,32,99,115,115,32,101,32,112,117,108,115,97,110,116,105,32,98,121,32,71,97,101,116,97,110,111,32,66,111,110,111,102,105,103,108,105,111,46,32,84,97,98,101,108,108,97,32,112,97,122,105,101,110,116,101,109,101,110,116,101,32,99,111,109,112,105,108,97,116,97,32,100,97,32,76,111,114,101,110,122,111,32,65,114,105,101,109,109,97];
+            window.onload = init(imp, imp_c);
+        </script>
+	</body>
+</html>
+
+
