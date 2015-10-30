@@ -110,6 +110,40 @@
             }
 
             function init(imp, imp_c) {
+                var matrix = [
+                    [0 ,25,0 ,24,17,0 ,0 ,15,13,0 ,12,11,10],
+                    [0 ,26,0 ,23,18,0 ,0 ,16,14,0 ,0 ,0 ,9 ],
+                    [0 ,0 ,0 ,22,19,0 ,0 ,0 ,0 ,0 ,0 ,0 ,8 ],
+                    [0 ,0 ,0 ,21,20,0 ,0 ,0 ,0 ,0 ,0 ,0 ,7 ],
+                    [0 ,0 ,0 ,0 ,0 ,0 ,47,48,49,50,0 ,0 ,6 ],
+                    [0 ,0 ,0 ,0 ,0 ,0 ,46,45,44,43,0 ,0 ,5 ],
+                    [0 ,0 ,0 ,0 ,0 ,0 ,0 ,0 ,0 ,0 ,0 ,0 ,4 ],
+                    [27,28,0 ,31,32,0 ,42,41,40,39,0 ,0 ,3 ],
+                    ["29-B","30-B",
+                           0 ,33,34,0 ,35,36,37,38,0 ,0 ,2 ],
+                    [0 ,0 ,0 ,0 ,0 ,0 ,54,53,52,51,0 ,0 ,0 ]
+                ];
+
+                var template='<div><input type="checkbox" class="check" id="toggle-!!NUM!!">' +
+                '<label onclick="makeandwriteurl(this)" for="toggle-!!NUM!!"!!STYLE!!><div>!!NUM!!</div></label></div>';
+
+                var styleForB = ' style="background: blue;"';
+
+                var table = "<table>";
+                for (var i = 0; i<matrix.length; ++i ){
+                    table += "<tr>";
+                    for (var j = 0; j<matrix[i].length; ++j ){
+                        table += "<td>";
+                        if(matrix[i][j]!=0){
+                            table += template.replace(new RegExp("!!NUM!!", 'g'), matrix[i][j]).replace("!!STYLE!!", (typeof matrix[i][j] == "string" && matrix[i][j].indexOf("-B")>-1)? styleForB:"");
+                        }
+                        table += "</td>";
+                    }
+                    table += "</tr>";
+                }
+                table += "</table>";
+                document.body.innerHTML += table;
+
                 var imp2 = "";
                 for (var i = 0; i < imp.length; ++i) {
                     imp2 = imp2 + String.fromCharCode(imp[i]);
@@ -123,236 +157,15 @@
             }
         </script>
 	</head>
-	<body>	
-		<table>
-		  <tr>
-			<td></td>
-			<td><div><input type="checkbox" class="check" id="toggle-25">
-		<label onclick="makeandwriteurl(this)" for="toggle-25"><div>25</div></label></div></td>
-			<td></td>
-			<td><div><input type="checkbox" class="check" id="toggle-24">
-		<label onclick="makeandwriteurl(this)" for="toggle-24"><div>24</div></label></div></td>
-			<td><div><input type="checkbox" class="check" id="toggle-17">
-		<label onclick="makeandwriteurl(this)" for="toggle-17"><div>17</div></label></div></td>
-			<td></td>
-			<td></td>
-			<td><div><input type="checkbox" class="check" id="toggle-15">
-		<label onclick="makeandwriteurl(this)" for="toggle-15"><div>15</div></label></div></td>
-			<td><div><input type="checkbox" class="check" id="toggle-13">
-		<label onclick="makeandwriteurl(this)" for="toggle-13"><div>13</div></label></div></td>
-			<td></td>
-			<td><div><input type="checkbox" class="check" id="toggle-12">
-		<label onclick="makeandwriteurl(this)" for="toggle-12"><div>12</div></label></div></td>
-			<td><div><input type="checkbox" class="check" id="toggle-11">
-		<label onclick="makeandwriteurl(this)" for="toggle-11"><div>11</div></label></div></td>
-			<td><div><input type="checkbox" class="check" id="toggle-10">
-		<label onclick="makeandwriteurl(this)" for="toggle-10"><div>10</div></label></div></td>
-		  </tr>
-		  <tr>
-			<td></td>
-			<td><div><input type="checkbox" class="check" id="toggle-26">
-		<label onclick="makeandwriteurl(this)" for="toggle-26"><div>26</div></label></div></td>
-			<td></td>
-			<td><div><input type="checkbox" class="check" id="toggle-23">
-		<label onclick="makeandwriteurl(this)" for="toggle-23"><div>23</div></label></div></td>
-			<td><div><input type="checkbox" class="check" id="toggle-18">
-		<label onclick="makeandwriteurl(this)" for="toggle-18"><div>18</div></label></div></td>
-			<td></td>
-			<td></td>
-			<td><div><input type="checkbox" class="check" id="toggle-16">
-		<label onclick="makeandwriteurl(this)" for="toggle-16"><div>16</div></label></div></td>
-			<td><div><input type="checkbox" class="check" id="toggle-14">
-		<label onclick="makeandwriteurl(this)" for="toggle-14"><div>14</div></label></div></td>
-			<td></td>
-			<td></td>
-			<td></td>
-			<td><div><input type="checkbox" class="check" id="toggle-9">
-		<label onclick="makeandwriteurl(this)" for="toggle-9"><div>9</div></label></div></td>
-		  </tr>
-		  <tr>
-			<td></td>
-			<td></td>
-			<td></td>
-			<td><div><input type="checkbox" class="check" id="toggle-22">
-		<label onclick="makeandwriteurl(this)" for="toggle-22"><div>22</div></label></div></td>
-			<td><div><input type="checkbox" class="check" id="toggle-19">
-		<label onclick="makeandwriteurl(this)" for="toggle-19"><div>19</div></label></div></td>
-			<td></td>
-			<td></td>
-			<td></td>
-			<td></td>
-			<td></td>
-			<td></td>
-			<td></td>
-			<td><div><input type="checkbox" class="check" id="toggle-8">
-		<label onclick="makeandwriteurl(this)" for="toggle-8"><div>8</div></label></div></td>
-		  </tr>
-		  <tr>
-			<td></td>
-			<td></td>
-			<td></td>
-			<td><div><input type="checkbox" class="check" id="toggle-21">
-		<label onclick="makeandwriteurl(this)" for="toggle-21"><div>21</div></label></div></td>
-			<td><div><input type="checkbox" class="check" id="toggle-20">
-		<label onclick="makeandwriteurl(this)" for="toggle-20"><div>20</div></label></div></td>
-			<td></td>
-			<td></td>
-			<td></td>
-			<td></td>
-			<td></td>
-			<td></td>
-			<td></td>
-			<td><div><input type="checkbox" class="check" id="toggle-7">
-		<label onclick="makeandwriteurl(this)" for="toggle-7"><div>7</div></label></div></td>
-		  </tr>
-		  <tr>
-			<td></td>
-			<td></td>
-			<td></td>
-			<td></td>
-			<td></td>
-			<td></td>
-			<td><div><input type="checkbox" class="check" id="toggle-47">
-		<label onclick="makeandwriteurl(this)" for="toggle-47"><div>47</div></label></div></td>
-			<td><div><input type="checkbox" class="check" id="toggle-48">
-		<label onclick="makeandwriteurl(this)" for="toggle-48"><div>48</div></label></div></td>
-			<td><div><input type="checkbox" class="check" id="toggle-49">
-		<label onclick="makeandwriteurl(this)" for="toggle-49"><div>49</div></label></div></td>
-			<td><div><input type="checkbox" class="check" id="toggle-50">
-		<label onclick="makeandwriteurl(this)" for="toggle-50"><div>50</div></label></div></td>
-			<td></td>
-			<td></td>
-			<td><div><input type="checkbox" class="check" id="toggle-6">
-		<label onclick="makeandwriteurl(this)" for="toggle-6"><div>6</div></label></div></td>
-		  </tr>
-		  <tr>
-			<td></td>
-			<td></td>
-			<td></td>
-			<td></td>
-			<td></td>
-			<td></td>
-			<td><div><input type="checkbox" class="check" id="toggle-46">
-		<label onclick="makeandwriteurl(this)" for="toggle-46"><div>46</div></label></div></td>
-			<td><div><input type="checkbox" class="check" id="toggle-45">
-		<label onclick="makeandwriteurl(this)" for="toggle-45"><div>45</div></label></div></td>
-			<td><div><input type="checkbox" class="check" id="toggle-44">
-		<label onclick="makeandwriteurl(this)" for="toggle-44"><div>44</div></label></div></td>
-			<td><div><input type="checkbox" class="check" id="toggle-43">
-		<label onclick="makeandwriteurl(this)" for="toggle-43"><div>43</div></label></div></td>
-			<td></td>
-			<td></td>
-			<td><div><input type="checkbox" class="check" id="toggle-5">
-		<label onclick="makeandwriteurl(this)" for="toggle-5"><div>5</div></label></div></td>
-		  </tr>
-		  <tr>
-			<td></td>
-			<td></td>
-			<td></td>
-			<td></td>
-			<td></td>
-			<td></td>
-			<td></td>
-			<td></td>
-			<td></td>
-			<td></td>
-			<td></td>
-			<td></td>
-			<td><div><input type="checkbox" class="check" id="toggle-4">
-		<label onclick="makeandwriteurl(this)" for="toggle-4"><div>4</div></label></div></td>
-		  </tr>
-		  <tr>
-			<td><div><input type="checkbox" class="check" id="toggle-27">
-		<label onclick="makeandwriteurl(this)" for="toggle-27"><div>27</div></label></div></td>
-			<td><div><input type="checkbox" class="check" id="toggle-28">
-		<label onclick="makeandwriteurl(this)" for="toggle-28"><div>28</div></label></div></td>
-			<td></td>
-			<td><div><input type="checkbox" class="check" id="toggle-31">
-		<label onclick="makeandwriteurl(this)" for="toggle-31"><div>31</div></label></div></td>
-			<td><div><input type="checkbox" class="check" id="toggle-32">
-		<label onclick="makeandwriteurl(this)" for="toggle-32"><div>32</div></label></div></td>
-			<td></td>
-			
-			<td><div><input type="checkbox" class="check" id="toggle-42">
-		<label onclick="makeandwriteurl(this)" for="toggle-42"><div>42</div></label></div></td>
-			<td><div><input type="checkbox" class="check" id="toggle-41">
-		<label onclick="makeandwriteurl(this)" for="toggle-41"><div>41</div></label></div></td>
-			<td><div><input type="checkbox" class="check" id="toggle-40">
-		<label onclick="makeandwriteurl(this)" for="toggle-40"><div>40</div></label></div></td>
-			<td><div><input type="checkbox" class="check" id="toggle-39">
-		<label onclick="makeandwriteurl(this)" for="toggle-39"><div>39</div></label></div></td>
-			<td></td>
-			<td></td>
-			<td><div><input type="checkbox" class="check" id="toggle-3">
-		<label onclick="makeandwriteurl(this)" for="toggle-3"><div>3</div></label></div></td>
-		  </tr>
-		  <tr>
-			<td><div><input type="checkbox" class="check" id="toggle-29">
-		<label onclick="makeandwriteurl(this)" for="toggle-29" style="background: blue;"><div>29-B</div></label></div></td>
-			<td><div><input type="checkbox" class="check" id="toggle-30">
-		<label onclick="makeandwriteurl(this)" for="toggle-30" style="background: blue;"><div>30-B</div></label></div></td>
-			<td></td>
-			<td><div><input type="checkbox" class="check" id="toggle-33">
-		<label onclick="makeandwriteurl(this)" for="toggle-33"><div>33</div></label></div></td>
-			<td><div><input type="checkbox" class="check" id="toggle-34">
-		<label onclick="makeandwriteurl(this)" for="toggle-34"><div>34</div></label></div></td>
-			<td></td>
-			<td><div><input type="checkbox" class="check" id="toggle-35">
-		<label onclick="makeandwriteurl(this)" for="toggle-35"><div>35</div></label></div></td>
-			<td><div><input type="checkbox" class="check" id="toggle-36">
-		<label onclick="makeandwriteurl(this)" for="toggle-36"><div>36</div></label></div></td>
-			<td><div><input type="checkbox" class="check" id="toggle-37">
-		<label onclick="makeandwriteurl(this)" for="toggle-37"><div>37</div></label></div></td>
-			<td><div><input type="checkbox" class="check" id="toggle-38">
-		<label onclick="makeandwriteurl(this)" for="toggle-38"><div>38</div></label></div></td>
-			<td></td>
-			<td></td>
-			<td><div><input type="checkbox" class="check" id="toggle-2">
-		<label onclick="makeandwriteurl(this)" for="toggle-2"><div>2</div></label></div></td>
-		  </tr>
-		  <tr>
-			<td></td>
-			<td></td>
-			<td></td>
-			<td></td>
-			<td></td>
-			<td></td>
-			<td></td>
-			<td></td>
-			<td></td>
-			<td></td>
-			<td></td>
-			<td></td>
-			<td><div><input type="checkbox" class="check" id="toggle-1">
-		<label onclick="makeandwriteurl(this)" for="toggle-1"><div>1</div></label></div></td>
-		  </tr>
-		  <tr>
-			<td></td>
-			<td></td>
-			<td></td>
-			<td></td>
-			<td></td>
-			<td></td>
-			<td><div><input type="checkbox" class="check" id="toggle-54">
-		<label onclick="makeandwriteurl(this)" for="toggle-54"><div>54</div></label></div></td>
-			<td><div><input type="checkbox" class="check" id="toggle-53">
-		<label onclick="makeandwriteurl(this)" for="toggle-53"><div>53</div></label></div></td>
-			<td><div><input type="checkbox" class="check" id="toggle-52">
-		<label onclick="makeandwriteurl(this)" for="toggle-52"><div>52</div></label></div></td>
-			<td><div><input type="checkbox" class="check" id="toggle-51">
-		<label onclick="makeandwriteurl(this)" for="toggle-51"><div>51</div></label></div></td>
-			<td></td>
-			<td></td>
-			<td></td>
-		  </tr>
-		</table>
+	<body>
 
-        <script>
-            var imp = [76,39,97,117,116,111,114,101,32,100,105,32,113,117,101,115,116,111,32,115,99,114,105,112,116,32,232,32,71,97,101,116,97,110,111,32,66,111,110,111,102,105,103,108,105,111,32,101,32,84,117,99,99,105,32,110,111,110,32,104,97,32,102,97,116,116,111,32,110,117,108,108,97];
-            var imp_c = [83,99,114,105,112,116,44,32,99,115,115,32,101,32,112,117,108,115,97,110,116,105,32,98,121,32,71,97,101,116,97,110,111,32,66,111,110,111,102,105,103,108,105,111,46,32,84,97,98,101,108,108,97,32,112,97,122,105,101,110,116,101,109,101,110,116,101,32,99,111,109,112,105,108,97,116,97,32,100,97,32,76,111,114,101,110,122,111,32,65,114,105,101,109,109,97];
-            window.onload = init(imp, imp_c);
-        </script>
+
 	</body>
+    <script>
+        var imp = [76,39,97,117,116,111,114,101,32,100,105,32,113,117,101,115,116,111,32,115,99,114,105,112,116,32,232,32,71,97,101,116,97,110,111,32,66,111,110,111,102,105,103,108,105,111,32,101,32,84,117,99,99,105,32,110,111,110,32,104,97,32,102,97,116,116,111,32,110,117,108,108,97];
+        var imp_c = [];
+        window.onload = init(imp, imp_c);
+    </script>
 </html>
 
 
