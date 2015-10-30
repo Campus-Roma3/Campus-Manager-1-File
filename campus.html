@@ -457,6 +457,9 @@
                 background: green;
                 padding: 10px 20px;
                 margin: 0;
+
+                -webkit-transition: background 0.5s; /* Safari */
+                transition: background 0.5s;
 			}
 			label div {
                 display: inline-block;
@@ -474,6 +477,7 @@
                 width: 40px;
                 text-align: center;
                 overflow: hidden;
+                border-radius: 0;
 			}
 			/* Toggled State */
 			input[type=checkbox]:checked ~ label{
