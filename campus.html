@@ -603,7 +603,7 @@
             var url = "http://bytearound.com/jobs/campus/getstatus.php?url=http://is.gd/"+makeTimeRound();
             httpGet(url, function(data){ if (data.status!="error") console.log(data.status); else console.log("error getting status"); }, "json");
 
-            // TODO fare in modo che se non trova nulla controlla i 10 minuti precedenti. Limite 24 ore.
+            // TODO fare in modo che se non trova nulla controlla i 10 minuti precedenti.
         }
 
         function reseturl() {
