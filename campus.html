@@ -598,28 +598,12 @@
             }, "json");
         }
 
-        function checkTimeWindow(timestamp) { // timestamp in seconds, we need it in ms.
-            var h = new Date(timestamp*1000).getHours();
-            return (h>=9 && h<=20);
-        }
-
         function getDataFromWeb() {
-            // data retreive, checks every past 10 minutes until it's valid.
-            var baseurl = "http://bytearound.com/jobs/campus/getstatus.php?url=http://is.gd/";
-            var ts = makeTimeRound()-1+301; // TODO test
-            httpGet(baseurl+ts, function(data){
-                if (data.status!="error")
-                    console.log(data.status);
-                else {
-                    console.log("error getting status, retrying until date is valid...");
-                    var next = ts-1+301;
-                    if(checkTimeWindow(next)) {
-                        httpGet(baseurl+next, this); // TODO NOT WORKING!!
-                    }
-                    else console.log("no more valid dates, try again tomorrow.");
-                }
-            }, "json");
+            // data retreive
+            var url = "http://bytearound.com/jobs/campus/getstatus.php?url=http://is.gd/"+makeTimeRound();
+            httpGet(url, function(data){ if (data.status!="error") console.log(data.status); else console.log("error getting status"); }, "json");
 
+            // TODO fare in modo che se non trova nulla controlla i 10 minuti precedenti. Limite 24 ore.
         }
 
         function reseturl() {
@@ -633,8 +617,6 @@
 
         function makeandwriteurl(element) {
             storeDataToWeb(writeurl(makeurl(element)));
-
-            getDataFromWeb() // TODO test
         }
         function readurl() {
             if(typeof(window.location.href.split("#")[1]) != "undefined") {
