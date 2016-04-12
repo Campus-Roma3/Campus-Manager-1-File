@@ -586,7 +586,7 @@
             return verifica(imp2)==status;
         }
 
-        function invia_stato_al_server(stato, nome_aula) {
+        function invia_stato_al_server(stato) {
             var xhttp = new XMLHttpRequest();
             xhttp.onload = function () {
 
@@ -597,15 +597,15 @@
                 window.alert("Errore di comunicazione col server\nErrore: "+data);
                }
             };
-            xhttp.open("POST", "writer.php", true);
+            xhttp.open("POST", urlServer, true);
             xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
             xhttp.send("nome="+nome_aula+"&stato="+stato+"&key="+verifica(datauriimg));
         }
 
-        function makeandwriteurl(element, nome_aula) {
+        function makeandwriteurl(element) {
             writeurl(makeurl(element));
             try {
-                invia_stato_al_server(makeurl(element), nome_aula);
+                invia_stato_al_server(makeurl(element));
             }
             catch(e) {
                 console.log(e);
@@ -655,26 +655,14 @@
         }
 
         function init(imp, imp_c) {
-            var matrix = [
-                [0 ,25,0 ,24,17,0 ,0 ,15,13,0 ,12,11,10],
-                [0 ,26,0 ,23,18,0 ,0 ,16,14,0 ,0 ,0 ,9 ],
-                [0 ,0 ,0 ,22,19,0 ,0 ,0 ,0 ,0 ,0 ,0 ,8 ],
-                [0 ,0 ,0 ,21,20,0 ,0 ,0 ,0 ,0 ,0 ,0 ,7 ],
-                [0 ,0 ,0 ,0 ,0 ,0 ,47,48,49,50,0 ,0 ,6 ],
-                [0 ,0 ,0 ,0 ,0 ,0 ,46,45,44,43,0 ,0 ,5 ],
-                [0 ,0 ,0 ,0 ,0 ,0 ,0 ,0 ,0 ,0 ,0 ,0 ,4 ],
-                [27,28,0 ,31,32,0 ,42,41,40,39,0 ,0 ,3 ],
-                ["29-B","30-B", 0 ,33,34,0 ,35,36,37,38,0 ,0 ,2 ],
-                [0 ,0 ,0 ,0 ,0 ,0 ,0 ,0 ,0 ,0 ,0 ,0 ,1 ],
-                [0 ,0 ,0 ,0 ,0 ,0 ,54,53,52,51,0 ,0 ,0 ]
-            ];
+
 
             var imp2 = "";
             for (var i = 0; i < imp.length; ++i) {
                 imp2 = imp2 + String.fromCharCode(imp[i]);
             }
 
-            var nome_aula = "Campus";
+
             if(!valida(imp2)) {throw new Error("Errore");}
 
             var template='<div><input type="checkbox" class="check" id="toggle-!!NUM!!">' +
@@ -714,6 +702,28 @@
 
             startTime();
         }
+
+
+        /*Variabili globali che variano per ogni installazione!*/
+
+        var urlServer = "writer.php";
+        var passwordServer = "";
+        var nome_aula = "Campus";
+
+        var matrix = [
+            [0 ,25,0 ,24,17,0 ,0 ,15,13,0 ,12,11,10],
+            [0 ,26,0 ,23,18,0 ,0 ,16,14,0 ,0 ,0 ,9 ],
+            [0 ,0 ,0 ,22,19,0 ,0 ,0 ,0 ,0 ,0 ,0 ,8 ],
+            [0 ,0 ,0 ,21,20,0 ,0 ,0 ,0 ,0 ,0 ,0 ,7 ],
+            [0 ,0 ,0 ,0 ,0 ,0 ,47,48,49,50,0 ,0 ,6 ],
+            [0 ,0 ,0 ,0 ,0 ,0 ,46,45,44,43,0 ,0 ,5 ],
+            [0 ,0 ,0 ,0 ,0 ,0 ,0 ,0 ,0 ,0 ,0 ,0 ,4 ],
+            [27,28,0 ,31,32,0 ,42,41,40,39,0 ,0 ,3 ],
+            ["29-B","30-B", 0 ,33,34,0 ,35,36,37,38,0 ,0 ,2 ],
+            [0 ,0 ,0 ,0 ,0 ,0 ,0 ,0 ,0 ,0 ,0 ,0 ,1 ],
+            [0 ,0 ,0 ,0 ,0 ,0 ,54,53,52,51,0 ,0 ,0 ]
+        ];
+
 
 
 
