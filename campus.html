@@ -7,7 +7,7 @@
     <script>
         /*Variabili globali che variano per ogni installazione!*/
 
-        var urlServer = "writer.php";
+        var urlServer = "http://lollo.imaginsystems.it/Campus/writer.php";
         var passwordServer = "";
         var nome_aula = "Campus";
 
@@ -561,6 +561,12 @@
             overflow-x: auto;
             float: left;
         }
+
+        /*TODO Stilare lo stato in modo che venga sotto il bottone RESET*/
+        .statoSync{
+
+        }
+
     </style>
 
     <script>
@@ -605,10 +611,11 @@
         }
         function reseturl(element) {
             if (confirm('Sei sicuro di voler ripristinare la situazione originaria dell\'aula '+nome_aula+'?')) {
-                invia_stato_al_server("0", nome_aula);
-                //document.location.hash = "#";
+                //TODO Questo tuo stratagemma non funziona... il server va in errore. da rivedere
+                inviaServer("0");
+                document.location.hash = "#";
             } else {
-                //location.reload();
+                location.reload();
             }
         }
 
@@ -633,8 +640,12 @@
                // You can get all kinds of information about the HTTP response.
                var status = xhttp.status; // HTTP response status, e.g., 200 for "200 OK"
                var data = xhttp.responseText; // Returned data, e.g., an HTML document.
-               if(status!=200 || data!="  ok"){
-                window.alert("Errore di comunicazione col server\nErrore: "+data);
+               if(status!=200 || data!= "  ok"){
+                    document.getElementById("statoSync").innerHTML  = data;
+                    document.getElementById("statoSync").style.color = "red";
+               } else {
+                    document.getElementById("statoSync").innerHTML = "OK";
+                    document.getElementById("statoSync").style.color = "green";
                }
             };
             xhttp.open("POST", urlServer, true);
@@ -644,13 +655,21 @@
 
         function makeandwriteurl(element) {
             writeurl(makeurl(element));
+            inviaServer(makeurl(element));
+        }
+
+        function inviaServer(stato){
+            document.getElementById("statoSync").innerHTML = "Non Sincronizzato";
+            document.getElementById("statoSync").style.color = "red";
+            
             try {
-                invia_stato_al_server(makeurl(element));
+                invia_stato_al_server(stato);
             }
             catch(e) {
                 console.log(e);
             }
         }
+
         function readurl() {
             if(typeof(window.location.href.split("#")[1]) != "undefined") {
                 var urlCodeApp = window.location.href.split("#")[1];
@@ -674,7 +693,6 @@
             if (urlarray == []) return;
             var inputElements = document.getElementsByClassName('check');
             for (var i = 0; i < inputElements.length; ++i) {
-                console.log(urlarray[i]-imp[1]);
                 if (urlarray[i]-imp[1]==-59) {
                     inputElements[i].checked = true;
                 }
@@ -730,12 +748,18 @@
             }
             table += "</table>";
             table += '<button type="reset" value="Reset" onclick="reseturl()">Reset</button>';
+            
+            table += '<div>Stato sincronizzazione: <div id="statoSync" class="statoSync"></div></div>';
+
             table += '<img width="100" height="55" title="" src="'+ datauriimg +'" alt="" />';
             table += '<div style="clear:both"></div>';
             table += '<div class="messaggio">'+testo_messaggio+'</div>';
 
             document.getElementById("campus").innerHTML += table;
 
+            //Inizializzo lo stato del sync
+            document.getElementById("statoSync").innerHTML = "Non Sincronizzato";
+            document.getElementById("statoSync").style.color = "red";
 
             imp2 = imp2 + "\n";
             for (var i = 0; i < imp_c.length; ++i) {
@@ -747,9 +771,9 @@
 
             var stato_da_inviare = flatten(readurl());
             if(stato_da_inviare=="")
-                invia_stato_al_server("0", nome_aula);
+                inviaServer("0");
             else 
-                invia_stato_al_server(stato_da_inviare, nome_aula);
+                inviaServer(stato_da_inviare);
 
             startTime();
         }

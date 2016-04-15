@@ -1,6 +1,8 @@
   <?php
   header("Access-Control-Allow-Origin: *");
 
+  /*Aggiugnere salvataggio dell'orario di ultimo update!*/
+
   $valid_ip="127.0.0.1"; //Cambiare questo parametro con l'IP del client
 
   if(!is_null($_SERVER['HTTP_X_FORWARDED_FOR']) || $_SERVER['REMOTE_ADDR']!=$valid_ip){
