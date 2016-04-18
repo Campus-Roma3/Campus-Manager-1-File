@@ -1,8 +1,6 @@
   <?php
   header("Access-Control-Allow-Origin: *");
 
-  /*Aggiugnere salvataggio dell'orario di ultimo update!*/
-
   $valid_ip="127.0.0.1"; //Cambiare questo parametro con l'IP del client
 
   if(!is_null($_SERVER['HTTP_X_FORWARDED_FOR']) || $_SERVER['REMOTE_ADDR']!=$valid_ip){
@@ -57,8 +55,13 @@
   exit();
 }
 
+//Genero la data/ora attuali
+$now = date("Y-m-d H:i:s");
+
+$toFile = $stato ."\n". $now;
+
 $myfile = fopen("stato".$nome.".txt", "w") or die("Errore Impossibile aprire il file!");
-fwrite($myfile, $stato);
+fwrite($myfile, $toFile);
 fclose($myfile);
 echo "ok";
 
