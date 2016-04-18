@@ -465,7 +465,7 @@
         /* Mappa Campus css */
 
         body {
-            height: 100vh;
+            height: 100%;
         }
         ::-moz-selection {
             background: rgba(255,255,255,0);
@@ -530,16 +530,17 @@
         }
         button {
             margin: 30px;
+            font-size: 120%;
             display: inline-block;
             font-family: arial, Tahoma;
             font-weight: bold;
             outline: 0px none !important;
             border: 1px solid #999 !important;
-            height: 40px;
+            height: 50px;
             padding: 10px;
             background: orange;
             color: white;
-            /*float: right;*/
+            /* float: right; */
             margin-bottom: 0;
         }
         img {
@@ -575,6 +576,9 @@
             color: #fff;
             background: #0873a5;
             height: 100%;
+        }
+        #form {
+            height: 100vh;
         }
         #statoSync{
             background: #fff;
@@ -694,8 +698,8 @@
 
         function inviaServer(stato){
             //console.log(stato);
-            document.getElementById("statoSync").innerHTML = "Non Sincronizzato";
-            document.getElementById("statoSync").style.color = "red";
+            document.getElementById("statoSync").innerHTML = "Sto provando...";
+            document.getElementById("statoSync").style.color = "orange";
             
             try {
                 invia_stato_al_server(stato);
@@ -824,8 +828,9 @@
     </script>
 </head>
 <body>
+<form id="form">
 <div id="chessboard" class="col-md-10">
-    <form id="campus"></form>
+    <div id="campus"></div>
     <div id="clock"></div>
 </div>
 <div id="mainmenu"  class="col-md-2">
@@ -835,7 +840,7 @@
     <div style="clear:both"></div>
     <br />
     <br />
-    <div class="statoSync">Stato sincronizzazione: <div id="statoSync"></div></div>
+    <div class="statoSync">Stato sincronizzazione: <br /><div id="statoSync"></div></div>
     <br />
     <br />
     <br />
@@ -844,6 +849,7 @@
     Messaggio utente:
     <div id="usermessage" class="messaggio">(cambiare dalla configurazione a inizio file)</div>
 </div>
+<form>
 
 </body>
 <script>
