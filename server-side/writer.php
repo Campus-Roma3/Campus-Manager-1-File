@@ -56,7 +56,7 @@
 }
 
 //Genero la data/ora attuali
-$now = date("Y-m-d H:i:s");
+$now = date("c");
 
 $toFile = $stato ."\n". $now;
 

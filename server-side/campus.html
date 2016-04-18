@@ -3,6 +3,29 @@
 <head>
 	<title>Mappa Campus</title>
 	<meta name="author" content="Gaetano Bonofiglio, Lorenzo Ariemma">
+    <script>
+
+        /*Variabili globali di configurazione. per cambiare le configurazioni ti basta cambiare questi dati*/
+        var matrix = [
+            [0, 25, 0, 24,17,0 ,0 ,15,13,0 ,12,11,10],
+            [0 ,26,0 ,23,18,0 ,0 ,16,14,0 ,0 ,0 ,9 ],
+            [0 ,0 ,0 ,22,19,0 ,0 ,0 ,0 ,0 ,0 ,0 ,8 ],
+            [0 ,0 ,0 ,21,20,0 ,0 ,0 ,0 ,0 ,0 ,0 ,7 ],
+            [0 ,0 ,0 ,0 ,0 ,0 ,47,48,49,50,0 ,0 ,6 ],
+            [0 ,0 ,0 ,0 ,0 ,0 ,46,45,44,43,0 ,0 ,5 ],
+            [0 ,0 ,0 ,0 ,0 ,0 ,0 ,0 ,0 ,0 ,0 ,0 ,4 ],
+            [27,28,0 ,31,32,0 ,42,41,40,39,0 ,0 ,3 ],
+            ["29-B","30-B", 0 ,33,34,0 ,35,36,37,38,0 ,0 ,2 ],
+            [0 ,0 ,0 ,0 ,0 ,0 ,0 ,0 ,0 ,0 ,0 ,0 ,1 ],
+            [0 ,0 ,0 ,0 ,0 ,0 ,54,53,52,51,0 ,0 ,0 ]
+            ];
+
+        var nome_aula = "Campus";
+
+        var reload_Interval = 10000;
+
+        
+    </script>
 	<style>
 		/*! normalize.css v3.0.2 | MIT License | git.io/normalize */
 
@@ -575,6 +598,7 @@
                var data = rawFile.responseText; // Returned data, e.g., an HTML document.
                if(status==200){
                     applyurl((interpreta_config(data)));
+                    console.log("configurazione caricata");
                } else {
                     window.alert("Errore di comunicazione col server");
                }
@@ -597,9 +621,13 @@
 
         function interpreta_config(dati) {
             if(dati!=null) {
+                dati = dati.split("\n");
+                lastUpdate = new Date(dati[1]);
+                var options = { weekday: 'short', year: 'numeric', month: 'long', day: 'numeric' };
+                document.getElementById("ultimoUpdate").innerHTML = lastUpdate.toLocaleDateString('it-IT', options) + " " + lastUpdate.toLocaleTimeString();
                 var urlCodeArr = [];
-                for (var i = 0; i < dati.length; i++) {
-                    urlCodeArr[i] = dati.charCodeAt(i)-48;
+                for (var i = 0; i < dati[0].length; i++) {
+                    urlCodeArr[i] = dati[0].charCodeAt(i)-48;
                 }
                 return urlCodeArr;
             }
@@ -649,28 +677,11 @@
         }
 
 
-/*Variabili globali di configurazione. per cambiare le configurazioni ti basta cambiare questi dati*/
-        var matrix = [
-            [0, 25, 0, 24,17,0 ,0 ,15,13,0 ,12,11,10],
-            [0 ,26,0 ,23,18,0 ,0 ,16,14,0 ,0 ,0 ,9 ],
-            [0 ,0 ,0 ,22,19,0 ,0 ,0 ,0 ,0 ,0 ,0 ,8 ],
-            [0 ,0 ,0 ,21,20,0 ,0 ,0 ,0 ,0 ,0 ,0 ,7 ],
-            [0 ,0 ,0 ,0 ,0 ,0 ,47,48,49,50,0 ,0 ,6 ],
-            [0 ,0 ,0 ,0 ,0 ,0 ,46,45,44,43,0 ,0 ,5 ],
-            [0 ,0 ,0 ,0 ,0 ,0 ,0 ,0 ,0 ,0 ,0 ,0 ,4 ],
-            [27,28,0 ,31,32,0 ,42,41,40,39,0 ,0 ,3 ],
-            ["29-B","30-B", 0 ,33,34,0 ,35,36,37,38,0 ,0 ,2 ],
-            [0 ,0 ,0 ,0 ,0 ,0 ,0 ,0 ,0 ,0 ,0 ,0 ,1 ],
-            [0 ,0 ,0 ,0 ,0 ,0 ,54,53,52,51,0 ,0 ,0 ]
-            ];
-
-        var nome_aula = "Campus";
-
-
     </script>
 </head>
 <body>
     <div id="immagine"></div>
+    <div>Last Update: <div id="ultimoUpdate"></div></div>
 	<form id="campus">
 
 	</form>
@@ -679,6 +690,7 @@
 	var imp = [71, 108, 105, 32, 97, 117, 116, 111, 114, 105, 32, 100, 105, 32, 113, 117, 101, 115, 116, 111, 32, 115, 99, 114, 105, 112, 116, 32, 115, 111, 110, 111, 32, 71, 97, 101, 116, 97, 110, 111, 32, 66, 111, 110, 111, 102, 105, 103, 108, 105, 111, 32, 101, 32, 76, 111, 114, 101, 110, 122, 111, 32, 65, 114, 105, 101, 109, 109, 97, 44, 32, 84, 117, 99, 99, 105, 32, 105, 110, 118, 101, 99, 101, 32, 99, 111, 110, 116, 105, 110, 117, 97, 32, 97, 32, 110, 111, 110, 32, 97, 118, 101, 114, 32, 102, 97, 116, 116, 111, 32, 110, 117, 108, 108, 97];
 	var imp_c = [];
 	window.onload = init(imp, imp_c);
+    window.onload += setInterval(caricaConfig, reload_Interval);
 </script>
 </html>
 
