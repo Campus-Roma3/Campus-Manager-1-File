@@ -2,7 +2,7 @@
 <html>
 <head>
     <title>Mappa Campus</title>
-    <meta name="author" content="Gaetano Bonofiglio, Lorenzo Ariemma, Tucci's PC">
+    <meta name="author" content="https://github.com/Campus-Roma3/Campus-Manager-1-File/graphs/contributors">
 
     <script>
         /*Variabili globali che variano per ogni installazione!*/
@@ -585,7 +585,12 @@
             padding: 2px;
             border-radius: 10px;
         }
-
+        #mainmenu a, #mainmenu a:visited, #mainmenu a:link {
+            color:#efefef;
+        }
+        #mainmenu a:hover, #mainmenu a:active, #mainmenu a:focus {
+            color:#fff;
+        }
     </style>
 
     <script>
@@ -777,7 +782,7 @@
                 imp2 = imp2 + String.fromCharCode(imp[i]);
             }
 
-            if(!valida(imp2, false)) {throw new Error("Errore");}
+            if(!valida(imp2, false)) { document.body.innerHTML = "Codice manomesso. Per favore scarica di nuovo la repository da <a href='https://github.com/Campus-Roma3/Campus-Manager-1-File'>https://github.com/Campus-Roma3/Campus-Manager-1-File</a>"; throw new Error("Errore");}
 
             var template='<div><input type="checkbox" class="check" id="toggle-!!NUM!!">' +
                     '<label onclick="makeandwriteurl(this)" for="toggle-!!NUM!!"!!STYLE!!><div>!!NUM!!</div></label></div>';
@@ -848,6 +853,11 @@
     <div style="clear:both"></div>
     Messaggio utente:
     <div id="usermessage" class="messaggio">(cambiare dalla configurazione a inizio file)</div>
+    <br />
+    <br />
+    <br />
+    <br />
+    <div>Repository: <a href='https://github.com/Campus-Roma3/Campus-Manager-1-File'>https://github.com/Campus-Roma3/Campus-Manager-1-File</a></div>
 </div>
 <form>
 
