@@ -611,12 +611,31 @@
         }
         function reseturl(element) {
             if (confirm('Sei sicuro di voler ripristinare la situazione originaria dell\'aula '+nome_aula+'?')) {
-                //TODO Questo tuo stratagemma non funziona... il server va in errore. da rivedere
-                inviaServer("0");
+                azzeraConfigOnline();
                 document.location.hash = "#";
             } else {
                 location.reload();
             }
+        }
+
+        function azzeraConfigOnline(){
+        	var stato = "";
+        	for(var i=0; i<numeroComputers(); i++){
+        		stato += "0";
+        	}
+        	inviaServer(stato);
+        }
+
+        function numeroComputers(){
+        	var numero = 0;
+        	for(var i=0; i<matrix.length; i++){
+        		for(var j=0; j<matrix[i].length; j++){
+        			if(matrix[i][j]!=0){
+        				numero++;
+        			}
+        		}
+        	}
+        	return numero;
         }
 
         function verifica(str, cascia) {
@@ -771,7 +790,7 @@
 
             var stato_da_inviare = flatten(readurl());
             if(stato_da_inviare=="")
-                inviaServer("0");
+                azzeraConfigOnline();
             else 
                 inviaServer(stato_da_inviare);
 
