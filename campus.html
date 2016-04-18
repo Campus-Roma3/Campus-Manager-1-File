@@ -543,19 +543,20 @@
             /* float: right; */
             margin-bottom: 0;
         }
-        img {
-            height: 66px;
-            width: 120px;
+        img#logoRm3 {
+            height: 77px;
+            width: 140px;
             margin: 30px;
             margin-bottom: 0;
         }
 
         #clock {
-            font-size: 120px;
+            font-size: 700%;
             font-weight: bold;
             display: block;
             text-align: center;
             margin: 30px;
+            font-family: "Courier New", Courier, monospace;
         }
         .messaggio {
             font-size: 20px;
@@ -569,6 +570,8 @@
             border: 1px solid #aaa;
             color: #000;
             background: #fff;
+            text-align: left;
+            padding: 7px;
             /* float: left; */
         }
         #mainmenu {
@@ -582,8 +585,9 @@
         }
         #statoSync{
             background: #fff;
-            padding: 2px;
-            border-radius: 10px;
+            padding: 6px;
+            border-radius: 6px;
+            display: inline-block;
         }
         #mainmenu a, #mainmenu a:visited, #mainmenu a:link {
             color:#efefef;
@@ -836,16 +840,23 @@
 <form id="form">
 <div id="chessboard" class="col-md-10">
     <div id="campus"></div>
+    <br />
+    <hr />
     <div id="clock"></div>
 </div>
 <div id="mainmenu"  class="col-md-2">
-    <img id="logoRm3" width="120" height="66" title="" src="" alt="" />
+    <img id="logoRm3" width="140" height="77" title="" src="" alt="" />
     <div style="clear:both"></div>
-    <button type="reset" value="Reset" onclick="reseturl()">Reset</button>
-    <div style="clear:both"></div>
+    <br />
+    <br />
+    <hr />
     <br />
     <br />
     <div class="statoSync">Stato sincronizzazione: <br /><div id="statoSync"></div></div>
+    <br />
+    <br />
+    <button type="reset" value="Reset" onclick="reseturl()">Reset</button>
+    <div style="clear:both"></div>
     <br />
     <br />
     <br />
