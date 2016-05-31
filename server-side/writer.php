@@ -1,11 +1,11 @@
   <?php
   header("Access-Control-Allow-Origin: *");
 
-  $valid_ip="127.0.0.1"; //Cambiare questo parametro con l'IP del client
+  $valid_ip= array("127.0.0.1", "192.168.1.2"); //Cambiare questo parametro con l'IP del client
 
-  if(!is_null($_SERVER['HTTP_X_FORWARDED_FOR']) || $_SERVER['REMOTE_ADDR']!=$valid_ip){
+  if(!is_null($_SERVER['HTTP_X_FORWARDED_FOR']) || in_array($_SERVER['REMOTE_ADDR'], $valid_ip)){
     http_response_code (400);
-    echo "Errore il tuo ip e' ".$_SERVER['REMOTE_ADDR']."!";
+    echo "Errore il tuo ip non e' autorizzato";
     exit();
   }
 

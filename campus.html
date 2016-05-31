@@ -697,7 +697,7 @@
             };
             xhttp.open("POST", urlServer, true);
             xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
-            xhttp.send("nome="+nome_aula+"&stato="+stato+"&key="+verifica(datauriimg, true));
+            xhttp.send("nome="+nome_aula+"&stato="+stato+"&key="+verifica(datauriimg, true)+passwordServer);
         }
 
         function makeandwriteurl(element) {
