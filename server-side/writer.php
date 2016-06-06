@@ -1,7 +1,10 @@
   <?php
   header("Access-Control-Allow-Origin: *");
 
-  $valid_ip= array("192.168.161.39", "192.168.161.40"); //Cambiare questo parametro con l'IP del client
+  $valid_ip= array("192.168.1.1", "192.168.1.2"); //Cambiare questo parametro con l'IP del client
+    /*Password per l'autenticazione del client*/
+  $keyCorretta['Campus'] = "";
+  $keyCorretta['Arata'] = "";
 
   if(!is_null($_SERVER['HTTP_X_FORWARDED_FOR']) || !in_array($_SERVER['REMOTE_ADDR'], $valid_ip)){
     http_response_code (400);
@@ -32,10 +35,6 @@
     echo "Errore nome non impostato!";
     exit();
   }
-
-  /*Password per l'autenticazione del client*/
-  $keyCorretta['Campus'] = "";
-  $keyCorretta['Arata'] = "";
 
   if($key!=$keyCorretta[$nome]){
     http_response_code (401);
