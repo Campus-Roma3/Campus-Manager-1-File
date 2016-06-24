@@ -1,19 +1,17 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Mappa Campus</title>
+    <title>Mappa</title>
     <meta name="author" content="https://github.com/Campus-Roma3/Campus-Manager-1-File/graphs/contributors">
 
     <script>
         /*Variabili globali che variano per ogni installazione!*/
 
-        var urlServer = "http://muglab.uniroma3.it/campus/writer.php";
-        var passwordServer = "wJqTlUQkNSLFfB4ViIELAQIvFJRI7LcF";
+        var urlServer = "";
+        var passwordServer = "";
         var nome_aula = "Campus";
 
-        var testo_messaggio = "Accesso Windows:<br />Utente: campus##<br />Password: campus##<br /><br />";
-        testo_messaggio += "Accesso Linux:<br />Utente: utente<br />Password: Password<br /><br />";
-        testo_messaggio += "Accesso Postgres:<br />Utente: postgres<br />Password: ***";
+        var testo_messaggio = "Accesso Windows:<br /><br />";
 
         var matrix = [
             [0 ,25,0 ,24,17,0 ,0 ,15,13,0 ,12,11,10],
@@ -462,7 +460,7 @@
             padding: 0;
         }
 
-        /* Mappa Campus css */
+        /* Mappa css */
 
         body {
             height: 100%;
@@ -520,12 +518,14 @@
             border: 1px solid #a90303;
         }
         table td {
-            height: 53px;
-            width: 70px;
+            height: 50px;
+            width: 75px;
             table-layout: fixed;
+            border: 4px solid transparent;
         }
         table {
-            width: 1000px;
+            width: auto;
+            height: auto;
             margin: 20px auto;
         }
         button {
@@ -673,7 +673,7 @@
                     cache = SHA256.hex(str);
                 return cache;
             }
-            return SHA256.hex(str);            
+            return SHA256.hex(str);
         }
 
         function valida(imp2, cascia){
@@ -698,7 +698,6 @@
             xhttp.open("POST", urlServer, true);
             xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
             xhttp.send("nome="+nome_aula+"&stato="+stato+"&key="+verifica(datauriimg, true)+passwordServer);
-            console.log(verifica(datauriimg, true)+passwordServer);
         }
 
         function makeandwriteurl(element) {
@@ -707,15 +706,20 @@
         }
 
         function inviaServer(stato){
-            //console.log(stato);
-            document.getElementById("statoSync").innerHTML = "Sto provando...";
-            document.getElementById("statoSync").style.color = "orange";
-            
-            try {
-                invia_stato_al_server(stato);
-            }
-            catch(e) {
-                console.log(e);
+            if(urlServer!=""){
+                //console.log(stato);
+                document.getElementById("statoSync").innerHTML = "Sto provando...";
+                document.getElementById("statoSync").style.color = "orange";
+
+                try {
+                    invia_stato_al_server(stato);
+                }
+                catch(e) {
+                    console.log(e);
+                }
+            } else {
+                document.getElementById("statoSync").innerHTML = "URL sel Server non impostato!";
+                document.getElementById("statoSync").style.color = "red";
             }
         }
 
@@ -782,6 +786,8 @@
 
         // questa parte del codice è sensibile e VOLUTAMENTE criptica nel suo scopo e implementazione. Si sconsiglia la modifica.
         function init(imp, imp_c) {
+            document.title = "Mappa "+nome_aula;
+
             var imp2 = "";
             for (var i = 0; i < imp.length; ++i) {
                 imp2 = imp2 + String.fromCharCode(imp[i]);
@@ -789,8 +795,8 @@
 
             if(!valida(imp2, false)) { document.body.innerHTML = "Codice manomesso. Per favore scarica di nuovo la repository da <a href='https://github.com/Campus-Roma3/Campus-Manager-1-File'>https://github.com/Campus-Roma3/Campus-Manager-1-File</a>"; throw new Error("Errore");}
 
-            var template='<div><input type="checkbox" class="check" id="toggle-!!NUM!!">' +
-                    '<label onclick="makeandwriteurl(this)" for="toggle-!!NUM!!"!!STYLE!!><div>!!NUM!!</div></label></div>';
+            var template='<input type="checkbox" class="check" id="toggle-!!NUM!!">' +
+                    '<label onclick="makeandwriteurl(this)" for="toggle-!!NUM!!"!!STYLE!!><div>!!NUM!!</div></label>';
 
             var styleForB = ' style="background: blue; border: 1px solid #1f1fa9;"';
 
@@ -800,7 +806,11 @@
                 for (var j = 0; j<matrix[i].length; ++j ){
                     table += "<td>";
                     if(matrix[i][j]!=0){
-                        table += template.replace(new RegExp("!!NUM!!", 'g'), matrix[i][j]).replace("!!STYLE!!", (typeof matrix[i][j] == "string" && matrix[i][j].indexOf("-B")>-1)? styleForB:"");
+                    	if(matrix[i][j]!="c"){
+                        	table += template.replace(new RegExp("!!NUM!!", 'g'), matrix[i][j]).replace("!!STYLE!!", (typeof matrix[i][j] == "string" && matrix[i][j].indexOf("-B")>-1)? styleForB:"");
+                    	} else {
+                    		table += '<label style="background: grey; cursor:default;"><div style="background: transparent; border: 0 !important"></div></label>';
+                    	}
                     }
                     table += "</td>";
                 }
@@ -828,7 +838,7 @@
             var stato_da_inviare = flatten(dec(imp, readurl()));
             if(stato_da_inviare=="")
                 azzeraConfigOnline();
-            else 
+            else
                 inviaServer(stato_da_inviare);
 
             startTime();
@@ -875,7 +885,7 @@
 
 </body>
 <script>
-    // se questa variabile viene modificata lo script NON funzionerà più. 
+    // se questa variabile viene modificata lo script NON funzionerà più.
     var imp = [71, 108, 105, 32, 97, 117, 116, 111, 114, 105, 32, 100, 105, 32, 113, 117, 101, 115, 116, 111, 32, 115, 99, 114, 105, 112, 116, 32, 115, 111, 110, 111, 32, 71, 97, 101, 116, 97, 110, 111, 32, 66, 111, 110, 111, 102, 105, 103, 108, 105, 111, 32, 101, 32, 76, 111, 114, 101, 110, 122, 111, 32, 65, 114, 105, 101, 109, 109, 97, 44, 32, 84, 117, 99, 99, 105, 32, 105, 110, 118, 101, 99, 101, 32, 99, 111, 110, 116, 105, 110, 117, 97, 32, 97, 32, 110, 111, 110, 32, 97, 118, 101, 114, 32, 102, 97, 116, 116, 111, 32, 110, 117, 108, 108, 97];
     var imp_c = [];
     window.onload = init(imp, imp_c);
