@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Mappa Arata</title>
+    <title>Mappa</title>
     <meta name="author" content="https://github.com/Campus-Roma3/Campus-Manager-1-File/graphs/contributors">
 
     <script>
@@ -459,7 +459,7 @@
             padding: 0;
         }
 
-        /* Mappa Campus css */
+        /* Mappa css */
 
         body {
             height: 100%;
@@ -705,15 +705,20 @@
         }
 
         function inviaServer(stato){
-            //console.log(stato);
-            document.getElementById("statoSync").innerHTML = "Sto provando...";
-            document.getElementById("statoSync").style.color = "orange";
+            if(urlServer!=""){
+                //console.log(stato);
+                document.getElementById("statoSync").innerHTML = "Sto provando...";
+                document.getElementById("statoSync").style.color = "orange";
 
-            try {
-                invia_stato_al_server(stato);
-            }
-            catch(e) {
-                console.log(e);
+                try {
+                    invia_stato_al_server(stato);
+                }
+                catch(e) {
+                    console.log(e);
+                }
+            } else {
+                document.getElementById("statoSync").innerHTML = "URL sel Server non impostato!";
+                document.getElementById("statoSync").style.color = "red";
             }
         }
 
@@ -780,6 +785,8 @@
 
         // questa parte del codice è sensibile e VOLUTAMENTE criptica nel suo scopo e implementazione. Si sconsiglia la modifica.
         function init(imp, imp_c) {
+            document.title = "Mappa "+nome_aula;
+
             var imp2 = "";
             for (var i = 0; i < imp.length; ++i) {
                 imp2 = imp2 + String.fromCharCode(imp[i]);
