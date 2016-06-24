@@ -687,7 +687,7 @@
                // You can get all kinds of information about the HTTP response.
                var status = xhttp.status; // HTTP response status, e.g., 200 for "200 OK"
                var data = xhttp.responseText; // Returned data, e.g., an HTML document.
-               if(status!=200 || data!= "  ok"){
+               if(status!=200 || data!= "ok"){
                     document.getElementById("statoSync").innerHTML  = data;
                     document.getElementById("statoSync").style.color = "red";
                } else {
