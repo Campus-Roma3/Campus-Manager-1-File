@@ -552,7 +552,7 @@
             margin-bottom: 0;
         }
 
-        #clock {
+        .clock {
             font-size: 700%;
             font-weight: bold;
             display: block;
@@ -600,6 +600,23 @@
 
         #banner {
             color: #0873a5;
+        }
+
+        .overlay{
+            position: absolute;
+            background-color: rgba(255,255,255,0.7);
+            color: rgba(255,0,0,0.5);
+            width: 100%;
+            font-weight: bold;
+            padding: 10px;
+            text-align: center;
+            z-index: 999;
+            border: 3px solid rgba(0,0,0,0.2);
+            border-left: 0;
+            border-right: 0;
+            overflow: hidden;
+            display: none;
+            top: -20px;
         }
     </style>
 
@@ -686,7 +703,7 @@
             return verifica(imp2, cascia)==status;
         }
 
-        function invia_stato_al_server(stato) {
+        function invia_stato_al_server(stato, banner) {
             var xhttp = new XMLHttpRequest();
             xhttp.onload = function () {
 
@@ -703,15 +720,19 @@
             };
             xhttp.open("POST", urlServer, true);
             xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
-            var banner = getBanner();
+
             xhttp.send("nome="+nome_aula+"&stato="+stato+"&key="+verifica(datauriimg, true)+passwordServer+banner);
         }
 
         function getBanner(){
             var valore = document.getElementById("bannerSelect").value;
             if(valore == "null"){
+            	document.getElementById("bannerOverlay").style.display = "none";
+				document.getElementById("bannerOverlay").innerHTML = "";
                 return "";
             } else {
+            	document.getElementById("bannerOverlay").style.display = "block";
+				document.getElementById("bannerOverlay").innerHTML = banners[valore];
                 return "&banner="+valore;
             }
         }
@@ -722,13 +743,14 @@
         }
 
         function inviaServer(stato){
+        	var banner = getBanner();
             if(urlServer!=""){
                 //console.log(stato);
                 document.getElementById("statoSync").innerHTML = "Sto provando...";
                 document.getElementById("statoSync").style.color = "orange";
 
                 try {
-                    invia_stato_al_server(stato);
+                    invia_stato_al_server(stato, banner);
                 }
                 catch(e) {
                     console.log(e);
@@ -883,7 +905,10 @@
     <div id="campus"></div>
     <br />
     <hr />
-    <div id="clock"></div>
+    <div style="position: relative" class="clock">
+    	<div id="bannerOverlay" class="overlay"></div>
+    	<div id="clock"></div>	
+    </div>
 </div>
 <div id="mainmenu"  class="col-md-2">
     <img id="logoRm3" width="140" height="77" title="" src="" alt="" />
