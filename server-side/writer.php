@@ -69,7 +69,22 @@ exit();
 //Genero la data/ora attuali
 $now = date("c");
 
-$toFile = $stato ."\n". $now;
+if (isset($_POST["banner"]) && !empty($_POST["banner"])) {
+  $banner = $_POST["banner"];
+  if(strlen($banner)>2){
+    http_response_code (400);
+    echo "Errore Banner troppo lungo!";
+    exit();
+  }
+  if (!preg_match("/^[0123456789]*$/", $banner)) {
+    http_response_code (400);
+    echo "Errore Banner non valido!";
+    exit();
+  }
+  $toFile = $stato ."\n". $now ."\n". $banner;
+} else {
+  $toFile = $stato ."\n". $now;
+}
 
 $myfile = fopen("stato".$nome.".txt", "w") or die("Errore Impossibile aprire il file!");
 fwrite($myfile, $toFile);
