@@ -27,6 +27,8 @@
             [0 ,0 ,0 ,0 ,0 ,0 ,54,53,52,51,0 ,0 ,0 ]
         ];
 
+        var banners = ["Esercitazione in corso", "Occupato", "Chiuso", "Chiuso per l'estate"];
+
     </script>
     <style>
     /* minify bootstrap (grid only) */
@@ -595,6 +597,10 @@
         #mainmenu a:hover, #mainmenu a:active, #mainmenu a:focus {
             color:#fff;
         }
+
+        #banner {
+            color: #0873a5;
+        }
     </style>
 
     <script>
@@ -697,7 +703,17 @@
             };
             xhttp.open("POST", urlServer, true);
             xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
-            xhttp.send("nome="+nome_aula+"&stato="+stato+"&key="+verifica(datauriimg, true)+passwordServer);
+            var banner = getBanner();
+            xhttp.send("nome="+nome_aula+"&stato="+stato+"&key="+verifica(datauriimg, true)+passwordServer+banner);
+        }
+
+        function getBanner(){
+            var valore = document.getElementById("bannerSelect").value;
+            if(valore == "null"){
+                return "";
+            } else {
+                return "&banner="+valore;
+            }
         }
 
         function makeandwriteurl(element) {
@@ -784,6 +800,18 @@
             return i;
         }
 
+        function init_banner(){
+            if(banners.length<=0){
+                return;
+            }
+            var html = "<select name=\"bannerSelect\" id=\"bannerSelect\" onChange=\"makeandwriteurl(this)\"><option value=\"null\" selected>Nessun Banner</option>";
+            banners.forEach(function(item, index){
+                html += "<option value=\""+index+"\">"+item+"</option>";
+            });
+            html += "</select>";
+            document.getElementById("banner").innerHTML = html;
+        }
+
         // questa parte del codice è sensibile e VOLUTAMENTE criptica nel suo scopo e implementazione. Si sconsiglia la modifica.
         function init(imp, imp_c) {
             document.title = "Mappa "+nome_aula;
@@ -820,6 +848,8 @@
 
             document.getElementById("logoRm3").src = datauriimg;
             document.getElementById("usermessage").innerHTML = testo_messaggio;
+
+            init_banner();
 
             document.getElementById("campus").innerHTML += table;
 
@@ -858,18 +888,12 @@
 <div id="mainmenu"  class="col-md-2">
     <img id="logoRm3" width="140" height="77" title="" src="" alt="" />
     <div style="clear:both"></div>
-    <br />
-    <br />
     <hr />
-    <br />
     <br />
     <div class="statoSync">Stato sincronizzazione: <br /><div id="statoSync"></div></div>
     <br />
-    <br />
     <button type="reset" value="Reset" onclick="reseturl()">Reset</button>
     <div style="clear:both"></div>
-    <br />
-    <br />
     <br />
     <br />
     <div style="clear:both"></div>
@@ -877,11 +901,14 @@
     <div id="usermessage" class="messaggio">(cambiare dalla configurazione a inizio file)</div>
     <br />
     <br />
+    <div>Scegli che tipo di banner mostrare sulla versione web<br />
+    <div id="banner" class="banner">(cambiare dalla configurazione a inizio file)</div></div>
+    <br />
     <br />
     <br />
     <div>Repository: <a href='https://github.com/Campus-Roma3/Campus-Manager-1-File'>https://github.com/Campus-Roma3/Campus-Manager-1-File</a></div>
 </div>
-<form>
+</form>
 
 </body>
 <script>
