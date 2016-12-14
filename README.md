@@ -1,6 +1,6 @@
 # Campus-Manager-1-file
 All in one html file for campus management at Roma Tre University. 
-Free or occupied status of each box is written on the url after each toggle and can be saved and restored. 
+Free or occupied status of each box is written on the url after each toggle and can be saved and restored. Data is sent (**if possible**) to a server that can store the status to make it visible to other applications. 
 
 ## Project philosophy
 If you decide to fork this project please keep in mind that for the use 
