@@ -9,6 +9,4 @@ It can use remote services, but always keep in mind a rollback or an
 exception handling if they're not reachable. And since it's only client-side, 
 avoid using passwords or api keys. Thanks!
 
-Demo (may be not up to date): http://www.gaetanobonofiglio.com/examples/campus.html
-
-Working version (Last Update: 2016/05/31): [Live from Dipartimento di Ingegneria @Uniroma3](http://muglab.uniroma3.it/campus/campus.html)
+Live read-only client: [Live from Dipartimento di Ingegneria @Uniroma3](http://muglab.uniroma3.it/campus/campus.html)
